@@ -1,0 +1,22 @@
+AccessibleAssociation
+=====================
+
+Allows associations to be created with hash parameters.
+
+
+Example
+=======
+
+class User < ActiveRecord::Base
+  belongs_to :preferences
+  accessible_association :preferences
+end
+
+u = User.create(:name => 'jones', :preferences => { :email => 'jones@mail.com' })
+
+u.name
+=> 'jones'
+u.preferences.email
+=> 'jones@mail.com'
+
+Copyright (c) 2009 Phil Sergi, released under the MIT license
