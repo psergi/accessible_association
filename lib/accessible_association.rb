@@ -11,8 +11,9 @@ module AccessibleAssociation
     original_method = instance_method(setter_method)
 
     define_method(setter_method) do |params|
+      associated_object = send(name)
       if params.is_a? Hash  
-        send("build_#{name}", params) 
+        associated_object ? associated_object.update_attributes(params) : send("build_#{name}", params) 
       else
         bound_method = original_method.bind(self)
         bound_method.call(params)
